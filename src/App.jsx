@@ -155,87 +155,40 @@ export default function App(){
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
-    <header className="sticky top-0 z-40">
-  {/* Светло-фиолетовый фон + слой монет */}
-  <div className="relative" style={{ background: "#EDE9FE" }}>
-    {/* монетки (20 штук с разными скоростями) */}
-    <div className="coins-layer">
-      {Array.from({ length: 20 }).map((_, i) => (
-        <img
-          key={i}
-          src="/coin.png"
-          alt=""
-          className="coin"
-          style={{
-            left: `${Math.random() * 100}%`,
-            animationDuration: `${8 + Math.random() * 6}s, ${3 + Math.random() * 2.5}s`,
-            animationDelay: `${Math.random() * 4}s, ${Math.random() * 2}s`
-          }}
-        />
-      ))}
-    </div>
-    {/* Верхняя полоса: название + бейджи (поверх монет) */}
-    <div className="py-4 relative z-10">
-      <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-        <div className="text-2xl font-extrabold tracking-tight text-black">
-          Outlet • WB
-        </div>
-        <div className="flex flex-col sm:flex-row gap-2 text-sm font-semibold uppercase tracking-wide text-black">
-          <span className="px-3 py-1 rounded bg-white/70">распродажа</span>
-          <span className="px-3 py-1 rounded bg-white/70">
-            {USE_CLOUD ? "облако: Supabase" : "локальный режим"}
-          </span>
-        </div>
+    <header className="sticky top-0 z-40 relative" style={{ background: "#6b4c8c" }}>
+  {/* Монетки */}
+  <div className="coins-layer">
+    {Array.from({ length: 20 }).map((_, i) => (
+      <img
+        key={i}
+        src="/coin.png"
+        alt="coin"
+        className="coin"
+        style={{
+          left: `${Math.random() * 100}%`,
+          width: `${30 + Math.random() * 40}px`, // случайный размер от 30px до 70px
+          animationDuration: `${6 + Math.random() * 6}s, ${3 + Math.random() * 2.5}s`,
+          animationDelay: `${Math.random() * 4}s, ${Math.random() * 2}s`
+        }}
+      />
+    ))}
+  </div>
+
+  {/* Основное содержимое шапки */}
+  <div className="py-4 relative z-10">
+    <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      {/* Левая часть */}
+      <div className="text-2xl font-extrabold tracking-tight text-black">
+        Outlet • WB
       </div>
-    </div>
 
-    {/* Вторая полоса: админ-кнопки (поверх монет) */}
-    <div className="max-w-6xl mx-auto px-4 pb-3 flex justify-end relative z-10">
-      {!admin ? (
-        <button
-          className="text-sm border border-black/20 bg-white/70 text-black px-3 py-1.5 rounded-md inline-flex items-center gap-2"
-          onClick={() => {
-            const p = prompt("Пароль админа");
-            if (p === ADMIN_PASSWORD) { setAdmin(true); localStorage.setItem("admin","1"); }
-            else alert("Неверный пароль");
-          }}
-        >
-          <LogIn size={16}/> Войти как админ
-        </button>
-      ) : (
-        <div className="flex items-center gap-2">
-          <button
-            className="text-sm border border-black/20 bg-white/70 text-black px-3 py-1.5 rounded-md inline-flex items-center gap-2"
-            onClick={() => { setEditing(null); setSheetOpen(true); }}
-          >
-            <Plus size={16}/> Добавить
-          </button>
-
-          <div className="relative group">
-            <button className="text-sm border border-black/20 bg-white/70 text-black px-3 py-1.5 rounded-md inline-flex items-center gap-2">
-              <Download size={16}/> Экспорт/Импорт
-            </button>
-            <div className="absolute right-0 mt-1 hidden group-hover:block bg-white/90 border border-black/20 rounded-md shadow text-sm">
-              <button className="block w-full text-left px-3 py-1.5 hover:bg-black/5" onClick={exportJSON}>
-                <Download size={14} className="inline mr-1"/> Экспорт JSON
-              </button>
-              <button className="block w-full text-left px-3 py-1.5 hover:bg-black/5" onClick={() => importJSON(false)}>
-                <Upload size={14} className="inline mr-1"/> Импорт (добавить)
-              </button>
-              <button className="block w-full text-left px-3 py-1.5 hover:bg-black/5" onClick={() => importJSON(true)}>
-                <Upload size={14} className="inline mr-1"/> Импорт (заменить)
-              </button>
-            </div>
-          </div>
-
-          <button
-            className="text-sm border border-black/20 bg-white/70 text-black px-2 py-1.5 rounded-md"
-            onClick={() => { setAdmin(false); localStorage.removeItem("admin"); }}
-          >
-            <LogOut size={16}/>
-          </button>
-        </div>
-      )}
+      {/* Правая часть */}
+      <div className="flex flex-col sm:flex-row gap-2 text-sm font-semibold uppercase tracking-wide text-black">
+        <span className="px-3 py-1 rounded bg-white/70">распродажа</span>
+        <span className="px-3 py-1 rounded bg-white/70">
+          {USE_CLOUD ? "облако: Supabase" : "локальный режим"}
+        </span>
+      </div>
     </div>
   </div>
 </header>
