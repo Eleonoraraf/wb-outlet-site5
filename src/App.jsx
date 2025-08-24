@@ -155,13 +155,25 @@ export default function App(){
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
-      <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
-          <div className="flex-1 flex items-center gap-3">
-            <span className="text-2xl font-bold">Outlet • WB</span>
-            <span className="text-xs px-2 py-1 rounded-full bg-slate-100">распродажа</span>
-            {USE_CLOUD ? <span className="text-xs px-2 py-1 rounded-full bg-emerald-50 text-emerald-700">облако: Supabase</span> : <span className="text-xs px-2 py-1 rounded-full bg-amber-50 text-amber-700">локальный режим</span>}
-          </div>
+      <header
+  className="sticky top-0 z-40 py-4"
+  style={{
+    background:
+      "repeating-linear-gradient(45deg, #7c3aed, #7c3aed 10px, #ffffff 10px, #ffffff 20px)"
+  }}
+>
+  <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+    {/* Левая часть */}
+    <div className="text-2xl font-extrabold tracking-tight text-black">
+      Outlet • WB
+    </div>
+
+    {/* Правая часть */}
+    <div className="flex flex-col sm:flex-row gap-2 text-sm font-semibold uppercase tracking-wide text-black">
+      <span className="px-3 py-1 rounded bg-white/70">распродажа</span>
+      <span className="px-3 py-1 rounded bg-white/70">локальный режим</span>
+    </div>
+  </div>
 
           {!admin ? (
             <button className="text-sm border px-3 py-1.5 rounded-md inline-flex items-center gap-2" onClick={() => {
