@@ -155,10 +155,7 @@ export default function App(){
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
-   <header
-  className="sticky top-0 z-40 relative shadow-lg"
-  style={{ background: "#6b4c8c" }}
->
+   <header className="sticky top-0 z-40 relative shadow-lg" style={{ background: "#6b4c8c" }}>
   {/* Монетки (фоновой слой) */}
   <div className="coins-layer z-0">
     {Array.from({ length: 20 }).map((_, i) => (
