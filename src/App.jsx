@@ -155,35 +155,29 @@ export default function App(){
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
-   <header className="sticky top-0 z-40 relative shadow-lg" style={{ background: "#6b4c8c" }}>
-  {/* Монетки (фоновой слой) */}
- <div className="coins-layer">
-  {Array.from({ length: 20 }).map((_, i) => {
-    const startX = `${Math.random() * 100}%`; // стартовая позиция по X
-    const fall   = 10 + Math.random() * 8;     // 10–18 c (медленнее)
-    const drift  = 6 + Math.random() * 4;      // 6–10 c
-    const size   = 30 + Math.random() * 40;    // 30–70 px
-    const delay  = Math.random() * 4;
-
-    return (
+  <header
+  className="sticky top-0 z-40 relative shadow-lg"
+  style={{ background: "#6b4c8c" }}
+>
+  {/* Монетки (фон) */}
+  <div className="coins-layer">
+    {coins.map((c, i) => (
       <img
         key={i}
         src="/coin.png"
         alt="coin"
         className="coin"
         style={{
-          '--x': startX,
-          left: startX,
-          width: `${size}px`,
-          animationDuration: `${fall}s, ${drift}s`,
-          animationDelay: `${delay}s, 0s`
+          left: `${c.leftPct}%`,
+          width: `${c.size}px`,
+          animationDuration: `${c.fall}s`,
+          animationDelay: `${c.delay}s`
         }}
       />
-    );
-  })}
-</div>
+    ))}
+  </div>
 
-  {/* Контент шапки поверх монет */}
+  {/* Верхняя полоса: название + бейджи */}
   <div className="py-4 relative z-10">
     <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
       <div className="text-2xl font-extrabold tracking-tight text-black">
@@ -197,9 +191,76 @@ export default function App(){
       </div>
     </div>
   </div>
+
+  {/* НИЖНЯЯ полоса: кнопки админа */}
+  <div className="relative z-10 pb-3">
+    <div className="max-w-6xl mx-auto px-4 flex justify-end gap-2">
+      {!admin ? (
+        <button
+          className="text-sm border border-black/20 bg-white/70 text-black px-3 py-1.5 rounded-md inline-flex items-center gap-2"
+          onClick={() => {
+            const p = prompt("Пароль админа");
+            if (p === ADMIN_PASSWORD) {
+              setAdmin(true);
+              localStorage.setItem("admin", "1");
+            } else alert("Неверный пароль");
+          }}
+        >
+          <LogIn size={16} /> Войти как админ
+        </button>
+      ) : (
+        <div className="flex items-center gap-2">
+          <button
+            className="text-sm border border-black/20 bg-white/70 text-black px-3 py-1.5 rounded-md inline-flex items-center gap-2"
+            onClick={() => {
+              setEditing(null);
+              setSheetOpen(true);
+            }}
+          >
+            <Plus size={16} /> Добавить
+          </button>
+
+          <div className="relative group">
+            <button className="text-sm border border-black/20 bg-white/70 text-black px-3 py-1.5 rounded-md inline-flex items-center gap-2">
+              <Download size={16} /> Экспорт/Импорт
+            </button>
+            <div className="absolute right-0 mt-1 hidden group-hover:block bg-white/90 border border-black/20 rounded-md shadow text-sm">
+              <button
+                className="block w-full text-left px-3 py-1.5 hover:bg-black/5"
+                onClick={exportJSON}
+              >
+                <Download size={14} className="inline mr-1" /> Экспорт JSON
+              </button>
+              <button
+                className="block w-full text-left px-3 py-1.5 hover:bg-black/5"
+                onClick={() => importJSON(false)}
+              >
+                <Upload size={14} className="inline mr-1" /> Импорт (добавить)
+              </button>
+              <button
+                className="block w-full text-left px-3 py-1.5 hover:bg-black/5"
+                onClick={() => importJSON(true)}
+              >
+                <Upload size={14} className="inline mr-1" /> Импорт (заменить)
+              </button>
+            </div>
+          </div>
+
+          <button
+            className="text-sm border border-black/20 bg-white/70 text-black px-2 py-1.5 rounded-md"
+            onClick={() => {
+              setAdmin(false);
+              localStorage.removeItem("admin");
+            }}
+          >
+            <LogOut size={16} />
+          </button>
+        </div>
+      )}
+    </div>
+  </div>
 </header>
-
-
+      
       <div className="max-w-6xl mx-auto px-4 py-4 grid gap-2 md:flex md:items-end md:gap-3">
         <div className="flex-1">
           <label className="text-xs text-slate-500">Поиск</label>
