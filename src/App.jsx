@@ -31,7 +31,42 @@ const supabase = USE_CLOUD ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : nul
 
 function uid() { return Math.random().toString(36).slice(2) + Date.now().toString(36); }
 function cls(...a){ return a.filter(Boolean).join(" "); }
+function CoinRain() {
+  // Пять монет в разных позициях и с разной задержкой
+  const coins = [
+    { left: 10, delay: 0.0, duration: 6 },
+    { left: 30, delay: 0.6, duration: 7 },
+    { left: 50, delay: 1.2, duration: 6 },
+    { left: 70, delay: 1.8, duration: 8 },
+    { left: 90, delay: 2.4, duration: 7 },
+  ];
 
+  return (
+    <div
+      className="pointer-events-none fixed inset-0 overflow-hidden"
+      style={{ zIndex: 0 }} // оверлей под содержимым
+      aria-hidden="true"
+    >
+      {coins.map((c, i) => (
+        <img
+          key={i}
+          src="/coin.svg"
+          alt=""
+          className="absolute animate-fall"
+          style={{
+            left: `${c.left}%`,
+            top: "-5%",                 // старт чуть выше экрана
+            animationDelay: `${c.delay}s`,
+            animationDuration: `${c.duration}s`,
+            width: "40px",              // размер монетки
+            height: "40px",
+            opacity: 0.9
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 function saveToFile(filename, data) {
   const blob = new Blob([data], { type: "application/json;charset=utf-8" });
   const url = URL.createObjectURL(blob);
