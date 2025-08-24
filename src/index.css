@@ -25,3 +25,21 @@ body { @apply text-slate-900; }
   50%  { transform: rotateY(180deg) scale(.9); }
   100% { transform: rotateY(360deg) scale(1); }
 }
+/* лёгкое появление монет при загрузке */
+.coin { animation-name: coinFall, coinSpin, coinDrift; }
+
+/* горизонтальный дрейф (чуть живее) */
+@keyframes coinDrift {
+  0%   { transform: translateX(0) }
+  50%  { transform: translateX(12px) }
+  100% { transform: translateX(0) }
+}
+
+/* уважение prefers-reduced-motion: уменьшаем анимации */
+@media (prefers-reduced-motion: reduce) {
+  .coin {
+    animation-duration: 12s !important;
+    animation-iteration-count: 1 !important;
+    opacity: 0.6;
+  }
+}
