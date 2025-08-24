@@ -31,7 +31,7 @@ const supabase = USE_CLOUD ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : nul
 
 function uid() { return Math.random().toString(36).slice(2) + Date.now().toString(36); }
 function cls(...a){ return a.filter(Boolean).join(" "); }
-unction CoinRain() {
+function CoinRain() {
   const coins = [
     { left: 8,  delay: 0.0, duration: 7 },
     { left: 24, delay: 0.8, duration: 8 },
@@ -47,7 +47,7 @@ unction CoinRain() {
           key={i}
           src="/coin.svg"
           alt=""
-          className="coin"  // <— используем твой класс из CSS
+          className="coin"
           style={{
             left: `${c.left}%`,
             animationDuration: `${c.duration}s`,
