@@ -4,19 +4,24 @@
 
 html, body, #root { height: 100%; }
 body { @apply text-slate-900; }
-/* Фон зебра для шапки */
-#zebraHeader {
-  background: repeating-linear-gradient(
-    45deg,
-    #7c3aed,
-    #7c3aed 10px,
-    #ffffff 10px,
-    #ffffff 20px
-  ) !important;
-  border-bottom: none !important;
+/* ---- падающие монетки ---- */
+.coins-layer { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.coin {
+  position: absolute;
+  top: -15vh;            /* старт выше верхней границы */
+  width: 56px; height: auto;
+  opacity: .85;
+  animation-name: coinFall, coinSpin;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
 }
 
-/* убираем любые белые подложки у внутренних div */
-#zebraHeader > div {
-  background: transparent !important;
+@keyframes coinFall {
+  0%   { transform: translateY(-20vh); }
+  100% { transform: translateY(120vh); }
+}
+@keyframes coinSpin {
+  0%   { transform: rotateY(0deg) scale(1); }
+  50%  { transform: rotateY(180deg) scale(.9); }
+  100% { transform: rotateY(360deg) scale(1); }
 }
