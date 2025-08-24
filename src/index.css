@@ -7,7 +7,7 @@ body { @apply text-slate-900; }
 
 /* ---- Падающие монетки ---- */
 .coins-layer {
-  position: fixed;      /* было absolute — ставим fixed, чтобы слой всегда был на весь экран */
+  position: fixed;      /* важно: fixed, не absolute */
   inset: 0;
   pointer-events: none;
   overflow: hidden;
@@ -20,7 +20,7 @@ body { @apply text-slate-900; }
   height: auto;
   opacity: .9;
   will-change: transform;
-  animation-name: coinFallOnly;
+  animation-name: coinFallOnly;          /* ключевые кадры объявлены ниже */
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
