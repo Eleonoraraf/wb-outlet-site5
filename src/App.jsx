@@ -31,36 +31,27 @@ const supabase = USE_CLOUD ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : nul
 
 function uid() { return Math.random().toString(36).slice(2) + Date.now().toString(36); }
 function cls(...a){ return a.filter(Boolean).join(" "); }
-function CoinRain() {
-  // Пять монет в разных позициях и с разной задержкой
+unction CoinRain() {
   const coins = [
-    { left: 10, delay: 0.0, duration: 6 },
-    { left: 30, delay: 0.6, duration: 7 },
-    { left: 50, delay: 1.2, duration: 6 },
-    { left: 70, delay: 1.8, duration: 8 },
-    { left: 90, delay: 2.4, duration: 7 },
+    { left: 8,  delay: 0.0, duration: 7 },
+    { left: 24, delay: 0.8, duration: 8 },
+    { left: 42, delay: 1.6, duration: 7 },
+    { left: 63, delay: 2.4, duration: 9 },
+    { left: 82, delay: 3.2, duration: 8 },
   ];
 
   return (
-    <div
-      className="pointer-events-none fixed inset-0 overflow-hidden"
-      style={{ zIndex: 0 }} // оверлей под содержимым
-      aria-hidden="true"
-    >
+    <div className="coins-layer" aria-hidden="true" style={{ zIndex: 0 }}>
       {coins.map((c, i) => (
         <img
           key={i}
           src="/coin.svg"
           alt=""
-          className="absolute animate-fall"
+          className="coin"  // <— используем твой класс из CSS
           style={{
             left: `${c.left}%`,
-            top: "-5%",                 // старт чуть выше экрана
-            animationDelay: `${c.delay}s`,
             animationDuration: `${c.duration}s`,
-            width: "40px",              // размер монетки
-            height: "40px",
-            opacity: 0.9
+            animationDelay: `${c.delay}s`,
           }}
         />
       ))}
