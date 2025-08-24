@@ -155,13 +155,7 @@ export default function App(){
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
-    <header
-  className="sticky top-0 z-40"
-  style={{
-    background:
-      "repeating-linear-gradient(45deg, #7c3aed, #7c3aed 10px, #ffffff 10px, #ffffff 20px)"
-  }}
->
+    <header id="zebraHeader" className="sticky top-0 z-40">
   {/* Верхняя полоса: название + бейджи */}
   <div className="py-4">
     <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
