@@ -12,31 +12,32 @@ body { @apply text-slate-900; }
   top: -15vh;                 /* старт выше верхней кромки */
   width: 56px; height: auto;
   opacity: .9;
-  /* ОДНА анимация для падения + вращения, плюс отдельная — для дрейфа по left */
-  animation-name: coinFallSpin, coinDriftLeft;
+  will-change: transform, left;
+  /* ТОЛЬКО падение + лёгкий дрейф по left */
+  animation-name: coinFallOnly, coinDriftLeft;
   animation-timing-function: linear, ease-in-out;
   animation-iteration-count: infinite, infinite;
 }
 
-/* Падение + вращение в ОДНОЙ анимации (нет конфликта) */
-@keyframes coinFallSpin {
-  0%   { transform: translateY(-20vh) rotateY(0deg)   scale(1); }
-  50%  { transform: translateY(50vh)  rotateY(180deg) scale(.95); }
-  100% { transform: translateY(120vh) rotateY(360deg) scale(1); }
+/* Падение без вращения */
+@keyframes coinFallOnly {
+  0%   { transform: translateY(-20vh); }
+  100% { transform: translateY(120vh); }
 }
 
-/* Лёгкий дрейф по свойству left — не конфликтует с transform */
+/* Лёгкий дрейф вбок — не конфликтует с transform */
 @keyframes coinDriftLeft {
   0%   { left: var(--x); }
   50%  { left: calc(var(--x) + 14px); }
   100% { left: var(--x); }
 }
 
-/* Уважение системных настроек - меньше анимации */
 @media (prefers-reduced-motion: reduce) {
   .coin {
-    animation-duration: 14s !important, 8s !important;
+    animation-duration: 18s !important, 10s !important;
     animation-iteration-count: 1 !important, 1 !important;
     opacity: .6;
+  }
+}
   }
 }
