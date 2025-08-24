@@ -157,22 +157,31 @@ export default function App(){
     <div className="min-h-screen bg-white text-slate-900">
    <header className="sticky top-0 z-40 relative shadow-lg" style={{ background: "#6b4c8c" }}>
   {/* Монетки (фоновой слой) */}
-  <div className="coins-layer z-0">
-    {Array.from({ length: 20 }).map((_, i) => (
+ <div className="coins-layer">
+  {Array.from({ length: 20 }).map((_, i) => {
+    const startX = `${Math.random() * 100}%`; // стартовая позиция
+    const fall = 6 + Math.random() * 6;       // 6–12 c
+    const drift = 4 + Math.random() * 3;      // 4–7 c
+    const size = 30 + Math.random() * 40;     // 30–70 px
+    const delay = Math.random() * 4;
+
+    return (
       <img
         key={i}
         src="/coin.png"
         alt="coin"
         className="coin"
         style={{
-          left: `${Math.random() * 100}%`,
-          width: `${30 + Math.random() * 40}px`,
-          animationDuration: `${6 + Math.random() * 6}s, ${3 + Math.random() * 2.5}s, ${4 + Math.random() * 3}s`,
-          animationDelay: `${Math.random() * 4}s, ${Math.random() * 2}s, 0s`
+          '--x': startX,
+          left: startX,
+          width: `${size}px`,
+          animationDuration: `${fall}s, ${drift}s`,
+          animationDelay: `${delay}s, 0s`
         }}
       />
-    ))}
-  </div>
+    );
+  })}
+</div>
 
   {/* Контент шапки поверх монет */}
   <div className="py-4 relative z-10">
