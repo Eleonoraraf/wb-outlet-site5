@@ -156,49 +156,98 @@ export default function App(){
   return (
     <div className="min-h-screen bg-white text-slate-900">
     <header
-  className="sticky top-0 z-40 py-4"
+  className="sticky top-0 z-40"
   style={{
     background:
       "repeating-linear-gradient(45deg, #7c3aed, #7c3aed 10px, #ffffff 10px, #ffffff 20px)"
   }}
 >
-  <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-    {/* Левая часть */}
-    <div className="text-2xl font-extrabold tracking-tight text-black">
-      Outlet • WB
-    </div>
+  {/* Верхняя полоса: название + бейджи */}
+  <div className="py-4">
+    <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      {/* Левая часть */}
+      <div className="text-2xl font-extrabold tracking-tight text-black">
+        Outlet • WB
+      </div>
 
-    {/* Правая часть */}
-    <div className="flex flex-col sm:flex-row gap-2 text-sm font-semibold uppercase tracking-wide text-black">
-      <span className="px-3 py-1 rounded bg-white/70">распродажа</span>
-      <span className="px-3 py-1 rounded bg-white/70">локальный режим</span>
+      {/* Правая часть */}
+      <div className="flex flex-col sm:flex-row gap-2 text-sm font-semibold uppercase tracking-wide text-black">
+        <span className="px-3 py-1 rounded bg-white/70">распродажа</span>
+        <span className="px-3 py-1 rounded bg-white/70">
+          {USE_CLOUD ? "облако: Supabase" : "локальный режим"}
+        </span>
+      </div>
     </div>
   </div>
 
-          {!admin ? (
-            <button className="text-sm border px-3 py-1.5 rounded-md inline-flex items-center gap-2" onClick={() => {
-              const p = prompt('Пароль админа'); if (p === ADMIN_PASSWORD){ setAdmin(true); localStorage.setItem('admin','1'); } else alert('Неверный пароль');
-            }}>
-              <LogIn size={16}/> Войти как админ
+  {/* Вторая полоса: админ-кнопки */}
+  <div className="max-w-6xl mx-auto px-4 pb-3 flex justify-end">
+    {!admin ? (
+      <button
+        className="text-sm border border-black/20 bg-white/70 text-black px-3 py-1.5 rounded-md inline-flex items-center gap-2"
+        onClick={() => {
+          const p = prompt("Пароль админа");
+          if (p === ADMIN_PASSWORD) {
+            setAdmin(true);
+            localStorage.setItem("admin", "1");
+          } else alert("Неверный пароль");
+        }}
+      >
+        <LogIn size={16} /> Войти как админ
+      </button>
+    ) : (
+      <div className="flex items-center gap-2">
+        <button
+          className="text-sm border border-black/20 bg-white/70 text-black px-3 py-1.5 rounded-md inline-flex items-center gap-2"
+          onClick={() => {
+            setEditing(null);
+            setSheetOpen(true);
+          }}
+        >
+          <Plus size={16} /> Добавить
+        </button>
+
+        {/* Экспорт/Импорт */}
+        <div className="relative group">
+          <button className="text-sm border border-black/20 bg-white/70 text-black px-3 py-1.5 rounded-md inline-flex items-center gap-2">
+            <Download size={16} /> Экспорт/Импорт
+          </button>
+          <div className="absolute right-0 mt-1 hidden group-hover:block bg-white/90 border border-black/20 rounded-md shadow text-sm">
+            <button
+              className="block w-full text-left px-3 py-1.5 hover:bg-black/5"
+              onClick={exportJSON}
+            >
+              <Download size={14} className="inline mr-1" /> Экспорт JSON
             </button>
-          ) : (
-            <div className="flex items-center gap-2">
-              <button className="text-sm border px-3 py-1.5 rounded-md inline-flex items-center gap-2" onClick={() => { setEditing(null); setSheetOpen(true); }}>
-                <Plus size={16}/> Добавить
-              </button>
-              <div className="relative group">
-                <button className="text-sm border px-3 py-1.5 rounded-md inline-flex items-center gap-2"><Download size={16}/>Экспорт/Импорт</button>
-                <div className="absolute right-0 mt-1 hidden group-hover:block bg-white border rounded-md shadow text-sm">
-                  <button className="block w-full text-left px-3 py-1.5 hover:bg-slate-50" onClick={exportJSON}><Download size={14} className="inline mr-1"/>Экспорт JSON</button>
-                  <button className="block w-full text-left px-3 py-1.5 hover:bg-slate-50" onClick={()=>importJSON(false)}><Upload size={14} className="inline mr-1"/>Импорт (добавить)</button>
-                  <button className="block w-full text-left px-3 py-1.5 hover:bg-slate-50" onClick={()=>importJSON(true)}><Upload size={14} className="inline mr-1"/>Импорт (заменить)</button>
-                </div>
-              </div>
-              <button className="text-sm px-2 py-1.5" onClick={()=>{ setAdmin(false); localStorage.removeItem('admin'); }}><LogOut size={16}/></button>
-            </div>
-          )}
+            <button
+              className="block w-full text-left px-3 py-1.5 hover:bg-black/5"
+              onClick={() => importJSON(false)}
+            >
+              <Upload size={14} className="inline mr-1" /> Импорт (добавить)
+            </button>
+            <button
+              className="block w-full text-left px-3 py-1.5 hover:bg-black/5"
+              onClick={() => importJSON(true)}
+            >
+              <Upload size={14} className="inline mr-1" /> Импорт (заменить)
+            </button>
+          </div>
         </div>
-      </header>
+
+        {/* Выход */}
+        <button
+          className="text-sm border border-black/20 bg-white/70 text-black px-2 py-1.5 rounded-md"
+          onClick={() => {
+            setAdmin(false);
+            localStorage.removeItem("admin");
+          }}
+        >
+          <LogOut size={16} />
+        </button>
+      </div>
+    )}
+  </div>
+</header>
 
       <div className="max-w-6xl mx-auto px-4 py-4 grid gap-2 md:flex md:items-end md:gap-3">
         <div className="flex-1">
