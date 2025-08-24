@@ -155,7 +155,7 @@ export default function App(){
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
-      <header
+    <header
   className="sticky top-0 z-40 py-4"
   style={{
     background:
