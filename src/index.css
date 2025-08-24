@@ -4,42 +4,39 @@
 
 html, body, #root { height: 100%; }
 body { @apply text-slate-900; }
-/* ---- падающие монетки ---- */
+/* ---- падающие монетки (исправленная версия) ---- */
 .coins-layer { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
 .coin {
   position: absolute;
-  top: -15vh;            /* старт выше верхней границы */
+  top: -15vh;                 /* старт выше верхней кромки */
   width: 56px; height: auto;
-  opacity: .85;
-  animation-name: coinFall, coinSpin;
+  opacity: .9;
+  /* ОДНА анимация для падения + вращения, плюс отдельная — для дрейфа по left */
+  animation-name: coinFallSpin, coinDriftLeft;
   animation-timing-function: linear, ease-in-out;
   animation-iteration-count: infinite, infinite;
 }
 
-@keyframes coinFall {
-  0%   { transform: translateY(-20vh); }
-  100% { transform: translateY(120vh); }
-}
-@keyframes coinSpin {
-  0%   { transform: rotateY(0deg) scale(1); }
-  50%  { transform: rotateY(180deg) scale(.9); }
-  100% { transform: rotateY(360deg) scale(1); }
-}
-/* лёгкое появление монет при загрузке */
-.coin { animation-name: coinFall, coinSpin, coinDrift; }
-
-/* горизонтальный дрейф (чуть живее) */
-@keyframes coinDrift {
-  0%   { transform: translateX(0) }
-  50%  { transform: translateX(12px) }
-  100% { transform: translateX(0) }
+/* Падение + вращение в ОДНОЙ анимации (нет конфликта) */
+@keyframes coinFallSpin {
+  0%   { transform: translateY(-20vh) rotateY(0deg)   scale(1); }
+  50%  { transform: translateY(50vh)  rotateY(180deg) scale(.95); }
+  100% { transform: translateY(120vh) rotateY(360deg) scale(1); }
 }
 
-/* уважение prefers-reduced-motion: уменьшаем анимации */
+/* Лёгкий дрейф по свойству left — не конфликтует с transform */
+@keyframes coinDriftLeft {
+  0%   { left: var(--x); }
+  50%  { left: calc(var(--x) + 14px); }
+  100% { left: var(--x); }
+}
+
+/* Уважение системных настроек - меньше анимации */
 @media (prefers-reduced-motion: reduce) {
   .coin {
-    animation-duration: 12s !important;
-    animation-iteration-count: 1 !important;
-    opacity: 0.6;
+    animation-duration: 14s !important, 8s !important;
+    animation-iteration-count: 1 !important, 1 !important;
+    opacity: .6;
   }
 }
