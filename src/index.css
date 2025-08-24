@@ -3,4 +3,20 @@
 @tailwind utilities;
 
 html, body, #root { height: 100%; }
-body { @apply bg-white text-slate-900; }
+body { @apply text-slate-900; }
+/* Фон зебра для шапки */
+#zebraHeader {
+  background: repeating-linear-gradient(
+    45deg,
+    #7c3aed,
+    #7c3aed 10px,
+    #ffffff 10px,
+    #ffffff 20px
+  ) !important;
+  border-bottom: none !important;
+}
+
+/* убираем любые белые подложки у внутренних div */
+#zebraHeader > div {
+  background: transparent !important;
+}
