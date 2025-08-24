@@ -159,11 +159,11 @@ export default function App(){
   {/* Монетки (фоновой слой) */}
  <div className="coins-layer">
   {Array.from({ length: 20 }).map((_, i) => {
-    const startX = `${Math.random() * 100}%`; // стартовая позиция
-    const fall = 6 + Math.random() * 6;       // 6–12 c
-    const drift = 4 + Math.random() * 3;      // 4–7 c
-    const size = 30 + Math.random() * 40;     // 30–70 px
-    const delay = Math.random() * 4;
+    const startX = `${Math.random() * 100}%`; // стартовая позиция по X
+    const fall   = 10 + Math.random() * 8;     // 10–18 c (медленнее)
+    const drift  = 6 + Math.random() * 4;      // 6–10 c
+    const size   = 30 + Math.random() * 40;    // 30–70 px
+    const delay  = Math.random() * 4;
 
     return (
       <img
