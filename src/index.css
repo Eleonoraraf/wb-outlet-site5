@@ -4,19 +4,25 @@
 
 html, body, #root { height: 100%; }
 body { @apply text-slate-900; }
-/* ---- падающие монетки (исправленная версия) ---- */
-.coins-layer { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
+/* ---- Падающие монетки: медленно, без вращения ---- */
+.coins-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
 
 .coin {
   position: absolute;
-  top: -15vh;                 /* старт выше верхней кромки */
-  width: 56px; height: auto;
+  top: -15vh;
+  width: 56px;
+  height: auto;
   opacity: .9;
-  will-change: transform, left;
-  /* ТОЛЬКО падение + лёгкий дрейф по left */
-  animation-name: coinFallOnly, coinDriftLeft;
-  animation-timing-function: linear, ease-in-out;
-  animation-iteration-count: infinite, infinite;
+  will-change: transform;
+  animation-name: coinFallOnly;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
 /* Падение без вращения */
@@ -25,19 +31,10 @@ body { @apply text-slate-900; }
   100% { transform: translateY(120vh); }
 }
 
-/* Лёгкий дрейф вбок — не конфликтует с transform */
-@keyframes coinDriftLeft {
-  0%   { left: var(--x); }
-  50%  { left: calc(var(--x) + 14px); }
-  100% { left: var(--x); }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .coin {
-    animation-duration: 18s !important, 10s !important;
-    animation-iteration-count: 1 !important, 1 !important;
+    animation-duration: 18s !important;
+    animation-iteration-count: 1 !important;
     opacity: .6;
-  }
-}
   }
 }
