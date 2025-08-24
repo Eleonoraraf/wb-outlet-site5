@@ -6,27 +6,33 @@ html, body, #root { height: 100%; }
 body { @apply text-slate-900; }
 
 /* ---- Падающие монетки ---- */
-.coins-layer {
-  position: fixed;      /* важно: fixed, не absolute */
+.coins-layer{
+  position: fixed;
   inset: 0;
   pointer-events: none;
   overflow: hidden;
+  z-index: 10;            /* ← поднимаем слой над контентом (header у тебя z-40, модалки z-50) */
 }
 
-.coin {
+.coin{
   position: absolute;
   top: -15vh;
   width: 56px;
-  height: auto;
   opacity: .9;
   will-change: transform;
-  animation-name: coinFallOnly;          /* ключевые кадры объявлены ниже */
+
+  /* АН�ИМАЦИЯ */
+  animation-name: coinFallOnly;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+
+  /* ДЕФОЛТЫ (на случай если inline не подхватится) */
+  animation-duration: 8s;    /* ← будет переопределено инлайном при наличии */
+  animation-delay: 0s;       /* ← будет переопределено инлайном при наличии */
 }
 
 /* Падение без вращения */
-@keyframes coinFallOnly {
+@keyframes coinFallOnly{
   0%   { transform: translateY(-20vh); }
   100% { transform: translateY(120vh); }
 }
