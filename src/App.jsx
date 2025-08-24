@@ -155,7 +155,10 @@ export default function App(){
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
-    <header className="sticky top-0 z-40 relative" style={{ background: "#6b4c8c" }}>
+   <header 
+  className="sticky top-0 z-40 relative shadow-lg" 
+  style={{ background: "#6b4c8c" }}
+>
   {/* Монетки */}
   <div className="coins-layer">
     {Array.from({ length: 20 }).map((_, i) => (
@@ -166,7 +169,7 @@ export default function App(){
         className="coin"
         style={{
           left: `${Math.random() * 100}%`,
-          width: `${30 + Math.random() * 40}px`, // случайный размер от 30px до 70px
+          width: `${30 + Math.random() * 40}px`, // случайный размер (30–70px)
           animationDuration: `${6 + Math.random() * 6}s, ${3 + Math.random() * 2.5}s`,
           animationDelay: `${Math.random() * 4}s, ${Math.random() * 2}s`
         }}
@@ -184,7 +187,7 @@ export default function App(){
 
       {/* Правая часть */}
       <div className="flex flex-col sm:flex-row gap-2 text-sm font-semibold uppercase tracking-wide text-black">
-        <span className="px-3 py-1 rounded bg-white/70">распродажа</span>
+        <span className="px-3 py-1 rounded bg-white/70">РАСПРОДАЖА</span>
         <span className="px-3 py-1 rounded bg-white/70">
           {USE_CLOUD ? "облако: Supabase" : "локальный режим"}
         </span>
@@ -192,6 +195,7 @@ export default function App(){
     </div>
   </div>
 </header>
+
 
       <div className="max-w-6xl mx-auto px-4 py-4 grid gap-2 md:flex md:items-end md:gap-3">
         <div className="flex-1">
