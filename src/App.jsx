@@ -174,7 +174,11 @@ export default function App(){
         />
       ))}
     </div>
-
+      <img
+      src="/coin.png"
+      alt="test"
+      style={{ position: "absolute", top: 20, left: 20, width: 80, zIndex: 20 }}
+    />
     {/* Верхняя полоса: название + бейджи (поверх монет) */}
     <div className="py-4 relative z-10">
       <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
