@@ -8,7 +8,7 @@ import { Download, LogIn, LogOut, Pencil, Plus, Trash2, Upload, Link as LinkIcon
  */
 
 // ==== НАСТРОЙКИ ====
-const ADMIN_PASSWORD = "admin"; // ← ПОМЕНЯЙТЕ после деплоя
+const ADMIN_PASSWORD = "04230"; // ← ПОМЕНЯЙТЕ после деплоя
 const SUPABASE_URL = "";        // ← ВСТАВЬТЕ URL проекта (например https://xxxx.supabase.co)
 const SUPABASE_ANON_KEY = "";   // ← ВСТАВЬТЕ anon ключ
 
