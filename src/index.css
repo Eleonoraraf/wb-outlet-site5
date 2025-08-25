@@ -5,42 +5,45 @@
 html, body, #root { height: 100%; }
 body { @apply text-slate-900; }
 
-/* ---- Падающие монетки ---- */
-.coins-layer{
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 10;            /* ← поднимаем слой над контентом (header у тебя z-40, модалки z-50) */
-}
-
-.coin{
+/* Монетки-падашки */
+.coin-rain .coin {
   position: absolute;
-  top: -15vh;
-  width: 56px;
-  opacity: .9;
+  top: 0;
+  left: var(--x);
+  width: var(--size);
+  height: var(--size);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  /* Важное: плавное вертикальное падение без вращения */
+  animation: coin-fall var(--dur) linear infinite;
+  animation-delay: var(--delay);
+  /* Старт выше видимой области контейнера */
+  transform: translateY(var(--yStart));
   will-change: transform;
-
-  /* АН�ИМАЦИЯ */
-  animation-name: coinFallOnly;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-
-  /* ДЕФОЛТЫ (на случай если inline не подхватится) */
-  animation-duration: 8s;    /* ← будет переопределено инлайном при наличии */
-  animation-delay: 0s;       /* ← будет переопределено инлайном при наличии */
+  opacity: 0.95; /* при желании уменьшите */
 }
 
-/* Падение без вращения */
-@keyframes coinFallOnly{
-  0%   { transform: translateY(-20vh); }
-  100% { transform: translateY(120vh); }
+/* Движение строго вниз в пределах контейнера хедера */
+@keyframes coin-fall {
+  0% {
+    transform: translateY(var(--yStart));
+    opacity: 0.0;
+  }
+  5% {
+    opacity: 1;
+  }
+  100% {
+    /* 110% — чуть ниже низа контейнера, чтобы исчезало плавно */
+    transform: translateY(110%);
+    opacity: 1;
+  }
 }
 
+/* Уважение системной настройки "уменьшить анимацию" */
 @media (prefers-reduced-motion: reduce) {
-  .coin {
-    animation-duration: 18s !important;
-    animation-iteration-count: 1 !important;
-    opacity: .6;
+  .coin-rain .coin {
+    animation: none !important;
+    opacity: 0 !important;
   }
 }
