@@ -47,3 +47,25 @@ body { @apply text-slate-900; }
     opacity: 0 !important;
   }
 }
+.coin-rain .coin {
+  position: absolute;
+  top: 0;
+  left: var(--x);
+  width: var(--size);
+  height: var(--size);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  animation: coin-fall var(--dur) linear infinite;
+  animation-delay: var(--delay);
+  transform: translateY(var(--yStart));
+  will-change: transform;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+@keyframes coin-fall {
+  0%   { transform: translateY(var(--yStart)); opacity: 0; }
+  5%   { opacity: 1; }
+  100% { transform: translateY(110%); opacity: 1; }
+}
