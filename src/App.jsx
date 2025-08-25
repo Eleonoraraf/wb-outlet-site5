@@ -222,7 +222,7 @@ export default function App(){
       )}
     </div>
   </div>
-  <FallingCoins count={25} src="/coin.svg" />
+  <FallingCoins count={25} src="/coin.png" />
 </header>
 
       
