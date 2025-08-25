@@ -157,7 +157,7 @@ export default function App(){
   return (
     <div className="min-h-screen bg-white text-slate-900">
        <CoinRain />
-  <header style={{ position: "relative" }}>
+ <header style={{ position: "relative" }}>
   <div className="py-4">
     <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
       <div className="text-2xl font-extrabold tracking-tight text-black">
@@ -222,7 +222,7 @@ export default function App(){
       )}
     </div>
   </div>
-<FallingCoins count={25} src="/coin.svg" />
+  <FallingCoins count={25} src="/coin.svg" />
 </header>
 
       
