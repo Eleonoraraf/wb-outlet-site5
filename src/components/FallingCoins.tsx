@@ -1,14 +1,5 @@
 import React from "react";
 
-type Props = {
-  count?: number;
-  src?: string;
-  sizeMin?: number;
-  sizeMax?: number;
-  durationMin?: number;
-  durationMax?: number;
-};
-
 export default function FallingCoins({
   count = 20,
   src = "/coin.svg",
@@ -16,10 +7,10 @@ export default function FallingCoins({
   sizeMax = 26,
   durationMin = 6,
   durationMax = 11,
-}: Props) {
+}) {
   const coins = React.useMemo(() => {
     const arr = Array.from({ length: count }).map((_, i) => {
-      const rand = (a: number, b: number) => a + Math.random() * (b - a);
+      const rand = (a, b) => a + Math.random() * (b - a);
       return {
         id: i,
         x: rand(0, 100),
@@ -48,19 +39,16 @@ export default function FallingCoins({
         <span
           key={c.id}
           className="coin"
-          style={
-            {
-              "--x": `${c.x}%`,
-              "--delay": `${c.delay}s`,
-              "--dur": `${c.dur}s`,
-              "--size": `${c.size}px`,
-              "--yStart": `${c.yStart}px`,
-              backgroundImage: `url("${src}")`,
-            } as React.CSSProperties
-          }
+          style={{
+            "--x": `${c.x}%`,
+            "--delay": `${c.delay}s`,
+            "--dur": `${c.dur}s`,
+            "--size": `${c.size}px`,
+            "--yStart": `${c.yStart}px`,
+            backgroundImage: `url("${src}")`,
+          }}
         />
       ))}
     </div>
   );
 }
-
