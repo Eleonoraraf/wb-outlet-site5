@@ -154,7 +154,8 @@ export default function App(){
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
-      <header style={{ position: "relative" }}>
+      
+      <header className="sticky top-0 z-40 relative shadow-lg" style={{ background: "#6b4c8c" }}>
         <div className="py-4">
           <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
             <div className="text-2xl font-extrabold tracking-tight text-black">
