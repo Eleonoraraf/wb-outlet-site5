@@ -5,48 +5,6 @@
 html, body, #root { height: 100%; }
 body { @apply text-slate-900; }
 
-/* Монетки-падашки */
-.coin-rain .coin {
-  position: absolute;
-  top: 0;
-  left: var(--x);
-  width: var(--size);
-  height: var(--size);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  /* Важное: плавное вертикальное падение без вращения */
-  animation: coin-fall var(--dur) linear infinite;
-  animation-delay: var(--delay);
-  /* Старт выше видимой области контейнера */
-  transform: translateY(var(--yStart));
-  will-change: transform;
-  opacity: 0.95; /* при желании уменьшите */
-}
-
-/* Движение строго вниз в пределах контейнера хедера */
-@keyframes coin-fall {
-  0% {
-    transform: translateY(var(--yStart));
-    opacity: 0.0;
-  }
-  5% {
-    opacity: 1;
-  }
-  100% {
-    /* 110% — чуть ниже низа контейнера, чтобы исчезало плавно */
-    transform: translateY(110%);
-    opacity: 1;
-  }
-}
-
-/* Уважение системной настройки "уменьшить анимацию" */
-@media (prefers-reduced-motion: reduce) {
-  .coin-rain .coin {
-    animation: none !important;
-    opacity: 0 !important;
-  }
-}
 .coin-rain .coin {
   position: absolute;
   top: 0;
@@ -68,4 +26,9 @@ body { @apply text-slate-900; }
   0%   { transform: translateY(var(--yStart)); opacity: 0; }
   5%   { opacity: 1; }
   100% { transform: translateY(110%); opacity: 1; }
+}
+
+/* Можно оставить поддержку reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .coin-rain .coin { animation: none !important; opacity: 0 !important; }
 }
