@@ -2,7 +2,7 @@ import React from "react";
 
 export default function FallingCoins({
   count = 20,
-  src = "/coin.svg",
+  src = "/coin.png",        // <— используем существующий файл в public
   sizeMin = 14,
   sizeMax = 26,
   durationMin = 6,
