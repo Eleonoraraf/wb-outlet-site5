@@ -1,3 +1,4 @@
+import FallingCoins from "@/components/FallingCoins";
 import React, { useEffect, useMemo, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { Download, LogIn, LogOut, Pencil, Plus, Trash2, Upload, Link as LinkIcon } from "lucide-react";
