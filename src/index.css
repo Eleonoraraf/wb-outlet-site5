@@ -5,6 +5,7 @@
 html, body, #root { height: 100%; }
 body { @apply text-slate-900; }
 
+/* Монетки */
 .coin-rain .coin {
   position: absolute;
   top: 0;
@@ -28,7 +29,6 @@ body { @apply text-slate-900; }
   100% { transform: translateY(110%); opacity: 1; }
 }
 
-/* Можно оставить поддержку reduce motion */
 @media (prefers-reduced-motion: reduce) {
   .coin-rain .coin { animation: none !important; opacity: 0 !important; }
 }
