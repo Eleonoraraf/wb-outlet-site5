@@ -221,8 +221,8 @@ export default function App(){
         </div>
 
         {/* дождь монет */}
-        <FallingCoins count={25} src="/coin.png" />
-      </header>
+       <FallingCoins count={25} src="/coin.png" />
+</header>
 
       {/* ...остальной код страницы без изменений... */}
       {/* (оставь твои фильтры/список/модалки/футер как были) */}
